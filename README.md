@@ -1,34 +1,52 @@
-# role_name
+# Ansible virtualbox_engine role
 
-A brief description of the role goes here.
+This is an [Ansible](http://www.ansible.com) role to setup virtualbox engine.
 
 ## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+[Ansible 2.4+](http://docs.ansible.com/ansible/latest/intro_installation.html)
 
 ## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+A list of all the default variables for this role is available in `defaults/main.yml`.
 
 ## Dependencies
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
 
 ## Example Playbook
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+If you want a quick setup on your local machine you can use the `files/setup.yml` playbook:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```shell
+$ cd amtega.virtualbox_engine/files
+$ ansible-playbook setup.yml --become --ask-become-pass
+```
+
+This is an example playbook:
+
+```yaml
+---
+
+- hosts: all
+  roles:
+    - amtega.virtualbox_engine
+```
 
 ## Testing
 
-A description of how to run tests of the role if available.
+Tests are based on vagrant virtual machines. You can setup vagrant engine quickly using the playbook `files/setup.yml`.
+
+Once you have vagrant, you can run the tests with the following commands:
+
+```shell
+$ cd amtega.virtualbox_engine/tests
+$ ansible-playbook main.yml
+```
 
 ## License
 
-Copyright (C) <YEAR> AMTEGA - Xunta de Galicia
+Copyright (C) 2017 AMTEGA - Xunta de Galicia
 
 This role is free software: you can redistribute it and/or modify
 it under the terms of:
@@ -44,5 +62,4 @@ GNU General Public License for more details or European Union Public License for
 
 ## Author Information
 
-- author_name 1.
-- author_name N.
+- Juan Antonio Valiño García
