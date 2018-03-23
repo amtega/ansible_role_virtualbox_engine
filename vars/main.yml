@@ -1,2 +1,116 @@
 ---
 # Role variables
+
+# VirtualBox dependency packages
+
+virtualbox_engine_dependency_packages:
+  debian_9:
+    - dkms
+    - python-pip
+
+  centos_6:
+    - binutils
+    - dkms
+    - gcc
+    - glibc-headers
+    - glibc-devel
+    - "kernel-headers-{{ ansible_kernel }}"
+    - "kernel-devel-{{ ansible_kernel }}"
+    - libgomp
+    - make
+    - patch
+    - python-pip
+
+  centos_7:
+    - binutils
+    - dkms
+    - gcc
+    - glibc-headers
+    - glibc-devel
+    - "kernel-headers-{{ ansible_kernel }}"
+    - "kernel-devel-{{ ansible_kernel }}"
+    - libgomp
+    - make
+    - patch
+    - python-pip
+
+  fedora_26:
+    - binutils
+    - dkms
+    - gcc
+    - glibc-headers
+    - glibc-devel
+    - "kernel-headers-{{ ansible_kernel }}"
+    - "kernel-devel-{{ ansible_kernel }}"
+    - libgomp
+    - make
+    - patch
+    - python-pip
+
+  fedora_27:
+    - binutils
+    - dkms
+    - gcc
+    - glibc-headers
+    - glibc-devel
+    - "kernel-headers-{{ ansible_kernel }}"
+    - "kernel-devel-{{ ansible_kernel }}"
+    - libgomp
+    - make
+    - patch
+    - python-pip
+
+  rhel_6:
+    - binutils
+    - dkms
+    - gcc
+    - glibc-headers
+    - glibc-devel
+    - "kernel-headers-{{ ansible_kernel }}"
+    - "kernel-devel-{{ ansible_kernel }}"
+    - libgomp
+    - make
+    - patch
+    - python-pip
+
+  rhel_7:
+    - binutils
+    - dkms
+    - gcc
+    - glibc-headers
+    - glibc-devel
+    - "kernel-headers-{{ ansible_kernel }}"
+    - "kernel-devel-{{ ansible_kernel }}"
+    - libgomp
+    - make
+    - patch
+    - python-pip
+
+# VirtualBox packages
+
+virtualbox_engine_packages:
+  debian_9:
+    - virtualbox-5.2
+
+  centos_6:
+    - VirtualBox-5.2
+
+  centos_7:
+    - VirtualBox-5.2
+
+  fedora_26:
+    - VirtualBox-5.2
+
+  fedora_27:
+    - VirtualBox-5.2
+
+  rhel_6:
+    - VirtualBox-5.2
+
+  rhel_7:
+    - VirtualBox-5.2
+
+# Where to temporary save the VirtualBox extention installation package
+
+virtualbox_engine_extension_pack_tmp_file: >-
+  /tmp/Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack

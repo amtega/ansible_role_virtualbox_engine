@@ -1,0 +1,20 @@
+---
+# Configuration tasks common to all distros
+
+- block:
+    - name: ensure vboxusers group is present
+      group:
+        name: vboxusers
+        state: present
+        system: yes
+
+    - name: add users into vboxusers group
+      user:
+        append: yes
+        groups: vboxusers
+        state: present
+        name: '{{ item }}'
+      with_items: "{{ virtualbox_engine_users | default([]) }}"
+  tags:
+    - role::virtualbox_engine
+    - role::virtualbox_engine::configure

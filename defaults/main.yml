@@ -1,2 +1,7 @@
 ---
 # Role default lower priority variables
+
+# List of users to add to vboxusers group. This is usefull to allow concrete
+# users to manage virtual machines without being root
+
+virtualbox_engine_users: []

@@ -1,0 +1,17 @@
+---
+
+# Setup virtualbox engine in localhost
+
+- name: setup virtualbox engine
+  hosts: localhost
+  vars_prompt:
+    - name: "users"
+      prompt: >-
+        Comma separated list of usernames that should have permissions to run
+        virtualbox"
+      default: "root"
+      private: no
+  roles:
+    - role: amtega.virtualbox_engine
+      vars:
+        virtualbox_engine_users: "{{ users.split(',') | map('trim') | list }}"
