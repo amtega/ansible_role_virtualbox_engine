@@ -14,7 +14,7 @@
         groups: vboxusers
         state: present
         name: '{{ item }}'
-      with_items: "{{ virtualbox_engine_users | default([]) }}"
+      loop: "{{ virtualbox_engine_users | default([]) }}"
   tags:
     - role::virtualbox_engine
     - role::virtualbox_engine::configure

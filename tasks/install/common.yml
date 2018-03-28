@@ -10,18 +10,14 @@
 
     - name: install virtualbox dependency packages
       package:
-        name: "{{ item }}"
+        name: "{{ virtualbox_engine_dependency_packages[distro_packages_key] }}"
         state: present
-      with_items: >-
-        {{ virtualbox_engine_dependency_packages[distro_packages_key] }}
 
     - name: install virtualbox packages
       package:
-        name: "{{ item }}"
+        name: "{{ virtualbox_engine_packages[distro_packages_key] }}"
         state: present
       register: virtualbox_engine_install_result
-      with_items: >-
-        {{ virtualbox_engine_packages[distro_packages_key] }}
 
     - block:
         - name: get virtualbox kernel modules status
@@ -32,7 +28,7 @@
         - name: rebuild virtualbox kernel modules
           shell: "{{ command }} setup"
           when: >-
-            virtualbox_engine_install_result | changed
+            virtualbox_engine_install_result is changed
             or not virtualbox_engine_modules_status_result.stdout
                    | search(".* are loaded")
           register: virtualbox_engine_rebuild_result
