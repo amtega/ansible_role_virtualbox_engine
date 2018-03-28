@@ -36,7 +36,7 @@
         name: "{{ item }}"
         state: present
         allow_downgrade: yes
-      with_items: >-
+      loop: >-
         {{ virtualbox_engine_dependency_packages[distro_packages_key]
            | select("search", "^kernel-.*$")
            | list }}

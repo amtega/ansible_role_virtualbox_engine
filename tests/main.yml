@@ -46,7 +46,7 @@
       assert:
         that: >-
           {{ virtualbox_metrics_info_result.stdout
-             | search("CPU/Load/User") }}
+             is search("CPU/Load/User") }}
   tags:
     - idempotence
 
