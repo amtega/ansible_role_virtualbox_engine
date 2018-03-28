@@ -30,7 +30,7 @@
           when: >-
             virtualbox_engine_install_result is changed
             or not virtualbox_engine_modules_status_result.stdout
-                   | search(".* are loaded")
+                   is search(".* are loaded")
           register: virtualbox_engine_rebuild_result
       vars:
         command: >-
@@ -71,14 +71,14 @@
               "Do you agree to these license terms and conditions": y
           changed_when: >-
             virtualbox_engine_extension_install_result.stdout
-            | search("Successfully installed")
+            is search("Successfully installed")
           failed_when: >-
             not virtualbox_engine_extension_install_result.stdout
-                | search("Successfully installed")
+                is search("Successfully installed")
           register: virtualbox_engine_extension_install_result
       when: >-
         not virtualbox_engine_extpacks_status_result.stdout
-            | search("Oracle VM VirtualBox Extension Pack")
+            is search("Oracle VM VirtualBox Extension Pack")
 
     - name: remove virtualbox extension pack installation package
       file:
