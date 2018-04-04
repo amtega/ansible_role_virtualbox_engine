@@ -21,6 +21,8 @@
         box: debian_9
         hostname: debian-9
         ansible_become: true
+  tags:
+    - sandbox
 
 - name: run idempotence test
   hosts: localhost
