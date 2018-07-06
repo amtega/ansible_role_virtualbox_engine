@@ -5,12 +5,12 @@ galaxy_info:
   description: Setup virtualbox engine
   company: AMTEGA - Xunta de Galicia
   license: GPLv3 or EUPL
-  min_ansible_version: 2.5
+  min_ansible_version: 2.6
   platforms:
   - name: Fedora
     versions:
-      - 25
-      - 26
+      - 27
+      - 28
   - name: EL
     versions:
       - 6
