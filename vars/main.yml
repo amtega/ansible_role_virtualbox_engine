@@ -1,6 +1,22 @@
 ---
 # Role variables
 
+# Supported distributions
+
+vagrant_engine_supported_distributions:
+  - centos
+  - debian
+  - fedora
+  - rhel
+
+# Supported distributions versions
+
+vagrant_engine_supported_versions:
+  centos: 6
+  debian: 9
+  fedora: 27
+  rhel: 6
+
 # VirtualBox dependency packages
 
 virtualbox_engine_dependency_packages:
@@ -38,7 +54,7 @@ virtualbox_engine_dependency_packages:
     - patch
     - python-pip
 
-  fedora_26:
+  fedora_27:
     - "@virtualization"
     - binutils
     - dkms
@@ -52,7 +68,7 @@ virtualbox_engine_dependency_packages:
     - patch
     - python-pip
 
-  fedora_27:
+  fedora_28:
     - "@virtualization"
     - binutils
     - dkms
@@ -108,10 +124,10 @@ virtualbox_engine_packages:
   centos_7:
     - VirtualBox-5.2
 
-  fedora_26:
+  fedora_27:
     - VirtualBox-5.2
 
-  fedora_27:
+  fedora_28:
     - VirtualBox-5.2
 
   rhel_6:
