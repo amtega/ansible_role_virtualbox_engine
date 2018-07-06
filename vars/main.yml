@@ -3,7 +3,7 @@
 
 # Supported distributions
 
-vagrant_engine_supported_distributions:
+virtualbox_engine_supported_distributions:
   - centos
   - debian
   - fedora
@@ -11,7 +11,7 @@ vagrant_engine_supported_distributions:
 
 # Supported distributions versions
 
-vagrant_engine_supported_versions:
+virtualbox_engine_supported_versions:
   centos: 6
   debian: 9
   fedora: 27
