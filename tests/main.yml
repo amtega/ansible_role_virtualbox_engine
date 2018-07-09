@@ -22,6 +22,24 @@
   tags:
     - sandbox
 
+- name: update kernel in sandbox hosts and reboot them
+  hosts: vagrant_sandbox_vms
+  roles:
+    - amtega.gnu_linux
+  tasks:
+    - name: update kernel
+      package:
+        name: "kernel-*"
+        state: latest
+      notify:
+        - reboot host
+        - wait host
+
+    - meta: flush_handlers
+  tags:
+    - prepare
+    - idempotence
+
 - name: test virtualbox_engine role
   hosts: vagrant_sandbox_vms
   roles:
