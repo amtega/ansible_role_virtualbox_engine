@@ -19,9 +19,9 @@
       apt_repository:
         repo: >-
             deb
-            https://download.virtualbox.org/virtualbox/{{ ansible_distribution
-                                                          | lower }}
-            {{ ansible_distribution_release }} contrib
+            {{ "https://download.virtualbox.org/virtualbox/"
+               + ansible_facts.distribution | lower }}
+            {{ ansible_facts.distribution_release }} contrib
         state: present
         update_cache: yes
         filename: virtualbox

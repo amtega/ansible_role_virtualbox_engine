@@ -34,8 +34,8 @@
           register: virtualbox_engine_rebuild_result
       vars:
         command: >-
-          {{ (ansible_distribution | lower == "rhel"
-              and ansible_distribution_major_version == "6")
+          {{ (ansible_facts.distribution | lower == "rhel"
+              and ansible_facts.distribution_major_version == "6")
              | ternary("service vboxdrv",
                        "/usr/lib/virtualbox/vboxdrv.sh") }}
 
@@ -86,8 +86,8 @@
         state: absent
   vars:
     distro_packages_key: >-
-      {{ ansible_distribution
-         | lower + "_" + ansible_distribution_major_version }}
+      {{ ansible_facts.distribution
+         | lower + "_" + ansible_facts.distribution_major_version }}
   tags:
     - role::virtualbox_engine
     - role::virtualbox_engine::packages
