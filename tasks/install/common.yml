@@ -22,7 +22,7 @@
     - block:
         - name: get virtualbox kernel modules status
           shell: "{{ command }} status"
-          changed_when: false
+          changed_when: no
           register: virtualbox_engine_modules_status_result
 
         - name: rebuild virtualbox kernel modules
@@ -46,7 +46,7 @@
 
     - name: get virtualbox extension pack status
       shell: "VBoxManage list extpacks"
-      changed_when: false
+      changed_when: no
       register: virtualbox_engine_extpacks_status_result
 
     - block:
