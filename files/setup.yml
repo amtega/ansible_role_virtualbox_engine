@@ -5,13 +5,28 @@
 - name: setup virtualbox engine
   hosts: localhost
   vars_prompt:
+    - name: ansible_become_user
+      propmpt: User with privileges to install packages
+      default: root
+      private: no
+
+    - name: ansible_become_pass
+      prompt: Password of the user with privileges to install packages
+      private: yes
+
+    - name: ansible_become_method
+      prompt: Method to become the user with privileges to install packages
+      default: su
+      private: no
+
     - name: "users"
       prompt: >-
         Comma separated list of usernames that should have permissions to run
-        virtualbox"
-      default: "root"
+        virtualbox
+      default: "root,{{ lookup('env','USER') }}"
       private: no
   roles:
     - role: amtega.virtualbox_engine
       vars:
         virtualbox_engine_users: "{{ users.split(',') | map('trim') | list }}"
+      become: true

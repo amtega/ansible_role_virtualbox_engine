@@ -21,7 +21,7 @@
       vars:
         subfolder: >-
           {{ (ansible_facts.distribution | lower in ["centos", "rhel"])
-             | ternary("el", ansible_distribution | lower) }}
+             | ternary("el", ansible_facts.distribution | lower) }}
 
     # The following tasks are workarounds to the lack of allow_downgrade arg in
     # package module, so in this case we call yum directly
@@ -43,7 +43,7 @@
       vars:
         distro_packages_key: >-
           {{ ansible_facts.distribution
-             | lower + "_" + ansible_distribution_major_version }}
+             | lower + "_" + ansible_facts.distribution_major_version }}
   tags:
     - role::virtualbox
     - role::virtualbox::packages
