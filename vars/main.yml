@@ -124,10 +124,10 @@ virtualbox_engine_packages:
   centos_7:
     - VirtualBox-5.2
 
-  fedora_27:
+  fedora_28:
     - VirtualBox-5.2
 
-  fedora_28:
+  fedora_29:
     - VirtualBox-5.2
 
   rhel_6:
