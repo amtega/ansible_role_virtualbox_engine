@@ -54,7 +54,7 @@ virtualbox_engine_dependency_packages:
     - patch
     - python-pip
 
-  fedora_27:
+  fedora_28:
     - "@virtualization"
     - binutils
     - dkms
@@ -68,7 +68,7 @@ virtualbox_engine_dependency_packages:
     - patch
     - python-pip
 
-  fedora_28:
+  fedora_29:
     - "@virtualization"
     - binutils
     - dkms
