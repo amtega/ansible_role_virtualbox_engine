@@ -116,25 +116,25 @@ virtualbox_engine_dependency_packages:
 
 virtualbox_engine_packages:
   debian_9:
-    - virtualbox-6.0
+    - Virtualbox-6.0
 
   centos_6:
-    - virtualbox-6.0
+    - Virtualbox-6.0
 
   centos_7:
-    - virtualbox-6.0
+    - Virtualbox-6.0
 
   fedora_28:
-    - virtualbox-6.0
+    - Virtualbox-6.0
 
   fedora_29:
-    - virtualbox-6.0
+    - Virtualbox-6.0
 
   rhel_6:
-    - virtualbox-6.0
+    - Virtualbox-6.0
 
   rhel_7:
-    - virtualbox-6.0
+    - Virtualbox-6.0
 
 # Where to temporary save the VirtualBox extention installation package
 
