@@ -23,27 +23,27 @@
           {{ (ansible_facts.distribution | lower in ["centos", "rhel"])
              | ternary("el", ansible_facts.distribution | lower) }}
 
-    # The following tasks are workarounds to the lack of allow_downgrade arg in
-    # package module, so in this case we call yum directly
-
-    - name: install yum package
-      package:
-        name: yum
-        state: present
-
-    - name: install kernel dependency packages
-      yum:
-        name: "{{ item }}"
-        state: present
-        allow_downgrade: yes
-      loop: >-
-        {{ virtualbox_engine_dependency_packages[distro_packages_key]
-           | select("search", "^kernel-.*$")
-           | list }}
-      vars:
-        distro_packages_key: >-
-          {{ ansible_facts.distribution
-             | lower + "_" + ansible_facts.distribution_major_version }}
+    # # The following tasks are workarounds to the lack of allow_downgrade arg in
+    # # package module, so in this case we call yum directly
+    #
+    # - name: install yum package
+    #   package:
+    #     name: yum
+    #     state: present
+    #
+    # - name: install kernel dependency packages
+    #   yum:
+    #     name: "{{ item }}"
+    #     state: present
+    #     allow_downgrade: yes
+    #   loop: >-
+    #     {{ virtualbox_engine_dependency_packages[distro_packages_key]
+    #        | select("search", "^kernel-.*$")
+    #        | list }}
+    #   vars:
+    #     distro_packages_key: >-
+    #       {{ ansible_facts.distribution
+    #          | lower + "_" + ansible_facts.distribution_major_version }}
   tags:
     - role::virtualbox
     - role::virtualbox::packages

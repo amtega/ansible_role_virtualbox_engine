@@ -4,29 +4,29 @@
 - block:
     - name: get virtualbox downloads page
       uri:
-        url: https://www.virtualbox.org/wiki/Downloads
+        url: "{{ virtualbox_engine_downloads_page }}"
         return_content: yes
       register: virtualbox_engine_get_downloads_result
 
-    - name: install virtualbox dependency packages
-      package:
-        name: "{{ virtualbox_engine_dependency_packages[distro_packages_key] }}"
-        state: present
+    - debug: var=t
+
+    - fail:
+
 
     - name: install virtualbox packages
       package:
-        name: "{{ virtualbox_engine_packages[distro_packages_key] }}"
+        name: "VirtualBox-{{ virtualbox_engine_version }}"
         state: present
       register: virtualbox_engine_install_result
 
     - block:
         - name: get virtualbox kernel modules status
-          shell: "{{ command }} status"
+          command: "{{ command }} status"
           changed_when: no
           register: virtualbox_engine_modules_status_result
 
         - name: rebuild virtualbox kernel modules
-          shell: "{{ command }} setup"
+          command: "{{ command }} setup"
           when: >-
             virtualbox_engine_install_result is changed
             or not virtualbox_engine_modules_status_result.stdout
@@ -39,13 +39,8 @@
              | ternary("service vboxdrv",
                        "/usr/lib/virtualbox/vboxdrv.sh") }}
 
-    - name: install pexpect python package
-      pip:
-        name: "pexpect>=3.3"
-        state: present
-
     - name: get virtualbox extension pack status
-      shell: "VBoxManage list extpacks"
+      command: "VBoxManage list extpacks"
       changed_when: no
       register: virtualbox_engine_extpacks_status_result
 
@@ -85,9 +80,17 @@
         path: "{{ virtualbox_engine_extension_pack_tmp_file }}"
         state: absent
   vars:
-    distro_packages_key: >-
-      {{ ansible_facts.distribution
-         | lower + "_" + ansible_facts.distribution_major_version }}
+    t: "{{ virtualbox_engine_get_downloads_result.content.splitlines() }}"
+
+    virtualbox_engine_version: >-
+        {{ virtualbox_engine_get_downloads_result.content.splitlines()
+           | select("search",
+                    "VirtualBox [0-9]+\.[0-9]+\.[0-9]+ platform")
+           | map("regex_replace",
+                 ".*VirtualBox ([0-9]+)\.([0-9]+)\.([0-9]+) platform.*",
+                 "\1.\2")
+           | list
+           | first }}
   tags:
     - role::virtualbox_engine
     - role::virtualbox_engine::packages
