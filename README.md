@@ -12,7 +12,10 @@ A list of all the default variables for this role is available in `defaults/main
 
 ## Dependencies
 
-None.
+- [amtega.check_platform](https://galaxy.ansible.com/amtega/check_platform)
+- [amtega.proxy_client](https://galaxy.ansible.com/amtega/proxy_client)
+- [amtega.epel](https://galaxy.ansible.com/amtega/epel) amtega.epel in RHEL/CentOS.
+- [amtega.packages](https://galaxy.ansible.com/amtega/packages)
 
 ## Example Playbook
 
@@ -46,7 +49,7 @@ $ ansible-playbook main.yml
 
 ## License
 
-Copyright (C) 2018 AMTEGA - Xunta de Galicia
+Copyright (C) 2019 AMTEGA - Xunta de Galicia
 
 This role is free software: you can redistribute it and/or modify it under the terms of:
 

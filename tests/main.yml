@@ -48,7 +48,7 @@
         - root
   tasks:
     - name: get virtualbox metrics info
-      shell: VBoxManage metrics list
+      command: VBoxManage metrics list
       register: virtualbox_metrics_info_result
       changed_when: no
 
@@ -66,4 +66,5 @@
     - role: amtega.vagrant_sandbox
       vagrant_sandbox_state: absent
   tags:
+    - cleanup
     - sandbox

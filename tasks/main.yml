@@ -1,12 +1,6 @@
 ---
 # Role tasks
 
-- name: sanity checks
-  import_tasks: check/main.yml
-  tags:
-    - role::virtualbox_engine
-    - role::virtualbox_engine::check
-
 - name: install virtualbox engine
   include_tasks: install/main.yml
   tags:

@@ -1,140 +1,119 @@
 ---
 # Role variables
 
-# Supported distributions
-
-virtualbox_engine_supported_distributions:
-  - centos
-  - debian
-  - fedora
-  - rhel
-
-# Supported distributions versions
-
-virtualbox_engine_supported_versions:
-  centos: 6
-  debian: 9
-  fedora: 27
-  rhel: 6
-
 # VirtualBox dependency packages
 
-virtualbox_engine_dependency_packages:
-  debian_9:
-    - dkms
-    - python-pip
+virtualbox_engine_packages_os:
+  centos:
+    all:
+      - name: "binutils"
+        state: present
+      - name: "dkms"
+        state: present
+      - name: "gcc"
+        state: present
+      - name: "glibc-headers"
+        state: present
+      - name: "glibc-devel"
+        state: present
+      - name: "kernel-headers-{{ ansible_facts.kernel }}"
+        state: present
+      - name: "kernel-devel-{{ ansible_facts.kernel }}"
+        state: present
+      - name: "libgomp"
+        state: present
+      - name: "make"
+        state: present
+      - name: "patch"
+        state: present
+      - name: "python-pip"
+        state: present
+    6:
+      - name: "@virtualization"
+        state: present
+    7:
+      - name: "@virtualization-hypervisor"
+        state: present
+      - name: "@virtualization-tools"
+        state: present
+      - name: "@virtualization-platform"
+        state: present
+  debian:
+    all:
+      - name: dkms
+        state: present
+      - name: python-pip
+        state: present
 
-  centos_6:
-    - "@virtualization"
-    - binutils
-    - dkms
-    - gcc
-    - glibc-headers
-    - glibc-devel
-    - "kernel-headers-{{ ansible_facts.kernel }}"
-    - "kernel-devel-{{ ansible_facts.kernel }}"
-    - libgomp
-    - make
-    - patch
-    - python-pip
+  fedora:
+    all:
+      - name: "@virtualization"
+        state: present
+      - name: "dkms"
+        state: present
+      - name: "gcc"
+        state: present
+      - name: "glibc-headers"
+        state: present
+      - name: "glibc-devel"
+        state: present
+      - name: "kernel-headers-{{ ansible_facts.kernel }}"
+        state: present
+      - name: "kernel-devel-{{ ansible_facts.kernel }}"
+        state: present
+      - name: "libgomp"
+        state: present
+      - name: "make"
+        state: present
+      - name: "patch"
+        state: present
+      - name: "python-pip"
+        state: present
 
-  centos_7:
-    - "@virtualization-hypervisor"
-    - "@virtualization-tools"
-    - "@virtualization-platform"
-    - binutils
-    - dkms
-    - gcc
-    - glibc-headers
-    - glibc-devel
-    - "kernel-headers-{{ ansible_facts.kernel }}"
-    - "kernel-devel-{{ ansible_facts.kernel }}"
-    - libgomp
-    - make
-    - patch
-    - python-pip
+  rhel:
+    all:
+      - name: "binutils"
+        state: present
+      - name: "dkms"
+        state: present
+      - name: "gcc"
+        state: present
+      - name: "glibc-headers"
+        state: present
+      - name: "glibc-devel"
+        state: present
+      - name: "kernel-headers-{{ ansible_facts.kernel }}"
+        state: present
+      - name: "kernel-devel-{{ ansible_facts.kernel }}"
+        state: present
+      - name: "libgomp"
+        state: present
+      - name: "make"
+        state: present
+      - name: "patch"
+        state: present
+      - name: "python-pip"
+        state: present
+    6:
+      - name: "@virtualization"
+        state: present
+    7:
+      - name: "@virtualization-hypervisor"
+        state: present
+      - name: "@virtualization-tools"
+        state: present
+      - name: "@virtualization-platform"
+        state: present
 
-  fedora_27:
-    - "@virtualization"
-    - binutils
-    - dkms
-    - gcc
-    - glibc-headers
-    - glibc-devel
-    - "kernel-headers-{{ ansible_facts.kernel }}"
-    - "kernel-devel-{{ ansible_facts.kernel }}"
-    - libgomp
-    - make
-    - patch
-    - python-pip
+virtualbox_engine_packages_python:
+  all:
+    all:
+      - name: "pexpect>=3.3"
+        state: present
 
-  fedora_28:
-    - "@virtualization"
-    - binutils
-    - dkms
-    - gcc
-    - glibc-headers
-    - glibc-devel
-    - "kernel-headers-{{ ansible_facts.kernel }}"
-    - "kernel-devel-{{ ansible_facts.kernel }}"
-    - libgomp
-    - make
-    - patch
-    - python-pip
+# VirtualBox download page
 
-  rhel_6:
-    - "@virtualization"
-    - binutils
-    - dkms
-    - gcc
-    - glibc-headers
-    - glibc-devel
-    - "kernel-headers-{{ ansible_facts.kernel }}"
-    - "kernel-devel-{{ ansible_facts.kernel }}"
-    - libgomp
-    - make
-    - patch
-    - python-pip
-
-  rhel_7:
-    - "@virtualization-hypervisor"
-    - "@virtualization-tools"
-    - "@virtualization-platform"
-    - binutils
-    - dkms
-    - gcc
-    - glibc-headers
-    - glibc-devel
-    - "kernel-headers-{{ ansible_facts.kernel }}"
-    - "kernel-devel-{{ ansible_facts.kernel }}"
-    - libgomp
-    - make
-    - patch
-    - python-pip
-
-# VirtualBox packages
-
-virtualbox_engine_packages:
-  debian_9:
-    - virtualbox-5.2
-
-  centos_6:
-    - VirtualBox-5.2
-
-  centos_7:
-    - VirtualBox-5.2
-
-  fedora_27:
-    - VirtualBox-5.2
-
-  fedora_28:
-    - VirtualBox-5.2
-
-  rhel_6:
-    - VirtualBox-5.2
-
-  rhel_7:
-    - VirtualBox-5.2
+virtualbox_engine_downloads_page: https://www.virtualbox.org/wiki/Downloads
 
 # Where to temporary save the VirtualBox extention installation package
 
