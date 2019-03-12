@@ -1,7 +1,7 @@
 ---
 # Tasks for testing role
 
-- name: configure vagrant sandbox environment
+- name: Configure vagrant sandbox environment
   hosts: localhost
   roles:
     - role: amtega.vagrant_presets
@@ -14,7 +14,7 @@
   tags:
     - sandbox
 
-- name: run idempotence test
+- name: Run idempotence test
   hosts: localhost
   roles:
     - role: amtega.vagrant_sandbox
@@ -22,12 +22,12 @@
   tags:
     - sandbox
 
-- name: update kernel in sandbox hosts and reboot them
+- name: Update kernel in sandbox hosts and reboot them
   hosts: vagrant_sandbox_vms
   roles:
     - amtega.reboot
   tasks:
-    - name: update kernel
+    - name: Update kernel
       package:
         name: "kernel-*"
         state: latest
@@ -40,19 +40,19 @@
     - prepare
     - idempotence
 
-- name: test virtualbox_engine role
+- name: Test virtualbox_engine role
   hosts: vagrant_sandbox_vms
   roles:
     - role: amtega.virtualbox_engine
       virtualbox_engine_users:
         - root
   tasks:
-    - name: get virtualbox metrics info
+    - name: Get virtualbox metrics info
       command: VBoxManage metrics list
       register: virtualbox_metrics_info_result
       changed_when: no
 
-    - name: verify virtualbox metrics info
+    - name: Verify virtualbox metrics info
       assert:
         that: >-
           {{ virtualbox_metrics_info_result.stdout
@@ -60,7 +60,7 @@
   tags:
     - idempotence
 
-- name: cleanup vagrant sandbox
+- name: Cleanup vagrant sandbox
   hosts: localhost
   roles:
     - role: amtega.vagrant_sandbox
