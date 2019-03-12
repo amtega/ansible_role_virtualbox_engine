@@ -1,13 +1,13 @@
 ---
 # Role tasks
 
-- name: install virtualbox engine
+- name: Install virtualbox engine
   include_tasks: install/main.yml
   tags:
     - role::virtualbox_engine
     - role::virtualbox_engine::install
 
-- name: configure virtualbox engine
+- name: Configure virtualbox engine
   include_tasks: configure/main.yml
   tags:
     - role::virtualbox_engine

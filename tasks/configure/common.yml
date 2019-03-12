@@ -2,13 +2,13 @@
 # Configuration tasks common to all distros
 
 - block:
-    - name: ensure vboxusers group is present
+    - name: Ensure vboxusers group is present
       group:
         name: vboxusers
         state: present
         system: yes
 
-    - name: add users into vboxusers group
+    - name: Add users into vboxusers group
       user:
         append: yes
         groups: vboxusers

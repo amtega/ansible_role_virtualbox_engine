@@ -2,17 +2,17 @@
 # Install tasks common to all distros
 
 - block:
-    - name: get virtualbox downloads page
+    - name: Get virtualbox downloads page
       uri:
         url: "{{ virtualbox_engine_downloads_page }}"
         return_content: yes
       register: virtualbox_engine_get_downloads_result
 
-    - name: get installed packages info
+    - name: Get installed packages info
       package_facts:
       register: virtualbox_packages_facts_result
 
-    - name: remove old virtualbox packages
+    - name: Remove old virtualbox packages
       package:
         name: >-
           {{ virtualbox_packages_facts_result.ansible_facts.packages.keys()
@@ -25,19 +25,19 @@
              | list }}
         state: absent
 
-    - name: install virtualbox packages
+    - name: Install virtualbox packages
       package:
         name: "VirtualBox-{{ virtualbox_engine_version }}"
         state: present
       register: virtualbox_engine_install_result
 
     - block:
-        - name: get virtualbox kernel modules status
+        - name: Get virtualbox kernel modules status
           command: "{{ command }} status"
           changed_when: no
           register: virtualbox_engine_modules_status_result
 
-        - name: rebuild virtualbox kernel modules
+        - name: Rebuild virtualbox kernel modules
           command: "{{ command }} setup"
           when: >-
             virtualbox_engine_install_result is changed
@@ -51,13 +51,13 @@
              | ternary("service vboxdrv",
                        "/usr/lib/virtualbox/vboxdrv.sh") }}
 
-    - name: get virtualbox extension pack status
+    - name: Get virtualbox extension pack status
       command: "VBoxManage list extpacks"
       changed_when: no
       register: virtualbox_engine_extpacks_status_result
 
     - block:
-        - name: download virtualbox extension pack installation package
+        - name: Download virtualbox extension pack installation package
           get_url:
             url: "{{ package }}"
             dest: "{{ virtualbox_engine_extension_pack_tmp_file }}"
@@ -69,7 +69,7 @@
                  | list
                  | first }}
 
-        - name: install virtualbox extension pack
+        - name: Install virtualbox extension pack
           expect:
             command: >-
               VBoxManage extpack install
@@ -87,7 +87,7 @@
         not virtualbox_engine_extpacks_status_result.stdout
             is search("Oracle VM VirtualBox Extension Pack")
 
-    - name: remove virtualbox extension pack installation package
+    - name: Remove virtualbox extension pack installation package
       file:
         path: "{{ virtualbox_engine_extension_pack_tmp_file }}"
         state: absent

@@ -2,12 +2,12 @@
 # Install tasks for debian
 
 - block:
-    - name: add https support to apt
+    - name: Add https support to apt
       package:
         name: apt-transport-https
         state: present
 
-    - name: add gpg keys for virtualbox repository in apt
+    - name: Add gpg keys for virtualbox repository in apt
       apt_key:
         url: "{{ item }}"
         state: present
@@ -15,7 +15,7 @@
         - https://www.virtualbox.org/download/oracle_vbox_2016.asc
         - https://www.virtualbox.org/download/oracle_vbox.asc
 
-    - name: setup virtualbox repository
+    - name: Setup virtualbox repository
       apt_repository:
         repo: >-
             deb
