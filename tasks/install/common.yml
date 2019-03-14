@@ -27,9 +27,14 @@
 
     - name: Install virtualbox packages
       package:
-        name: "VirtualBox-{{ virtualbox_engine_version }}"
+        name: >-
+          {{ virtualbox_engine_package_name }}-{{ virtualbox_engine_version }}
         state: present
       register: virtualbox_engine_install_result
+      vars:
+        virtualbox_engine_package_name: >-
+          {{ (ansible_facts.os_family | lower == "redhat")
+             | ternary("VirtualBox", "virtualbox") }}
 
     - block:
         - name: Get virtualbox kernel modules status
