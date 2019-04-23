@@ -69,6 +69,8 @@ virtualbox_engine_packages_os:
         state: present
       - name: "python-pip"
         state: present
+      - name: "VirtualBox-server"
+        state: absent
 
   rhel:
     all:
