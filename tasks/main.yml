@@ -1,6 +1,29 @@
 ---
 # Role tasks
 
+- include_role:
+    name: amtega.check_platform
+  vars:
+    check_platform_distributions:
+      centos: 6
+      debian: 9
+      fedora: 27
+      rhel: 6
+
+- include_role:
+    name: amtega.proxy_client
+  vars:
+    proxy_client_permanent: no
+
+- include_role:
+    name: amtega.epel
+
+- include_role:
+    name: amtega.packages
+  vars:
+    packages_os: "{{ virtualbox_engine_packages_os }}"
+    packages_python: "{{ virtualbox_engine_packages_python }}"
+
 - name: Install virtualbox engine
   include_tasks: install/main.yml
   tags:

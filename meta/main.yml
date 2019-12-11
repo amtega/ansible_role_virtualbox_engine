@@ -6,7 +6,7 @@ galaxy_info:
   description: Setup virtualbox engine
   company: AMTEGA - Xunta de Galicia
   license: GPLv3 or EUPL
-  min_ansible_version: 2.7
+  min_ansible_version: 2.8
   platforms:
     - name: EL
       versions:
@@ -14,11 +14,8 @@ galaxy_info:
         - 7
     - name: Fedora
       versions:
-        - 27
-        - 28
-    - name: Debian
-      versions:
-        - stretch
+        - 29
+        - 30
   galaxy_tags:
     - virtualbox
     - system
@@ -26,29 +23,17 @@ galaxy_info:
 
 dependencies:
   - role: amtega.check_platform
-    vars:
-      check_platform_distributions:
-        centos: 6
-        debian: 9
-        fedora: 27
-        rhel: 6
     tags:
-      - role::virtualbox_engine
+      - never
 
   - role: amtega.proxy_client
-    vars:
-      proxy_client_permanent: no
     tags:
-      - role::virtualbox_engine
+      - never
 
   - role: amtega.epel
-    when: ansible_facts.distribution | lower in ["rhel", "centos"]
     tags:
-      - role::virtualbox_engine
+      - never
 
   - role: amtega.packages
-    vars:
-      packages_os: "{{ virtualbox_engine_packages_os }}"
-      packages_python: "{{ virtualbox_engine_packages_python }}"
     tags:
-      - role::virtualbox_engine
+      - never

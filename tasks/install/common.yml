@@ -51,7 +51,7 @@
           register: virtualbox_engine_rebuild_result
       vars:
         command: >-
-          {{ (ansible_facts.distribution | lower == "rhel"
+          {{ (ansible_facts.distribution | lower == "redhat"
               and ansible_facts.distribution_major_version == "6")
              | ternary("service vboxdrv",
                        "/usr/lib/virtualbox/vboxdrv.sh") }}
