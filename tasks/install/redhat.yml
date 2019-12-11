@@ -14,7 +14,7 @@
     gpgkey: https://www.virtualbox.org/download/oracle_vbox.asc
   vars:
     subfolder: >-
-      {{ (ansible_facts.distribution | lower in ["centos", "rhel"])
+      {{ (ansible_facts.distribution | lower in ["centos", "redhat"])
          | ternary("el", ansible_facts.distribution | lower) }}
   tags:
     - role::virtualbox
