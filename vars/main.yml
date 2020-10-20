@@ -72,7 +72,7 @@ virtualbox_engine_packages_os:
       - name: "VirtualBox-server"
         state: absent
 
-  rhel:
+  redhat:
     all:
       - name: "binutils"
         state: present
