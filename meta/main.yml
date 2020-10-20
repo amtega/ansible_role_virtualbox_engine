@@ -28,7 +28,7 @@ dependencies:
         centos: 6
         debian: 9
         fedora: 27
-        rhel: 6
+        redhat: 6
 
   - role: amtega.proxy_client
     vars:
