@@ -10,12 +10,12 @@ galaxy_info:
   platforms:
     - name: EL
       versions:
-        - 6
         - 7
+        - 8
     - name: Fedora
       versions:
-        - 29
-        - 30
+        - 32
+        - 33
   galaxy_tags:
     - virtualbox
     - system
@@ -25,16 +25,17 @@ dependencies:
   - role: amtega.check_platform
     vars:
       check_platform_distributions:
-        centos: 6
-        debian: 9
-        fedora: 27
-        redhat: 6
+        centos: 7
+        fedora: 32
+        redhat: 7
 
   - role: amtega.proxy_client
     vars:
       proxy_client_permanent: no
 
   - role: amtega.epel
+
+  - role: amtega.rpmfusion
 
   - role: amtega.packages
     vars:
