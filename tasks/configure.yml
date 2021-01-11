@@ -1,5 +1,5 @@
 ---
-# Configuration tasks common to all distros
+# Configuration tasks
 
 - block:
     - name: Ensure vboxusers group is present
@@ -16,5 +16,5 @@
         name: '{{ item }}'
       loop: "{{ virtualbox_engine_users | default([]) }}"
   tags:
-    - role::virtualbox_engine
-    - role::virtualbox_engine::configure
+    - role::docker_engine
+    - role::docker_engine::configure

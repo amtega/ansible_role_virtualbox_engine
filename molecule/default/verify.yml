@@ -1,0 +1,17 @@
+---
+
+- name: Verify
+  hosts: molecule_hosts
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: Get virtualbox metrics info
+      command: VBoxManage metrics list
+      register: virtualbox_metrics_info_result
+      changed_when: no
+
+    - name: Verify virtualbox metrics info
+      assert:
+        that: >-
+          {{ virtualbox_metrics_info_result.stdout
+             is search("CPU/Load/User") }}

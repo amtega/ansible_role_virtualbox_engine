@@ -4,108 +4,9 @@
 # VirtualBox dependency packages
 
 virtualbox_engine_packages_os:
-  centos:
+  all:
     all:
-      - name: "binutils"
-        state: present
-      - name: "dkms"
-        state: present
-      - name: "gcc"
-        state: present
-      - name: "glibc-headers"
-        state: present
-      - name: "glibc-devel"
-        state: present
-      - name: "kernel-headers-{{ ansible_facts.kernel }}"
-        state: present
-      - name: "kernel-devel-{{ ansible_facts.kernel }}"
-        state: present
-      - name: "libgomp"
-        state: present
-      - name: "make"
-        state: present
-      - name: "patch"
-        state: present
-      - name: "python-pip"
-        state: present
-    6:
-      - name: "@virtualization"
-        state: present
-    7:
-      - name: "@virtualization-hypervisor"
-        state: present
-      - name: "@virtualization-tools"
-        state: present
-      - name: "@virtualization-platform"
-        state: present
-  debian:
-    all:
-      - name: dkms
-        state: present
-      - name: python-pip
-        state: present
-
-  fedora:
-    all:
-      - name: "@virtualization"
-        state: present
-      - name: "dkms"
-        state: present
-      - name: "gcc"
-        state: present
-      - name: "glibc-headers"
-        state: present
-      - name: "glibc-devel"
-        state: present
-      - name: "kernel-headers-{{ ansible_facts.kernel }}"
-        state: present
-      - name: "kernel-devel-{{ ansible_facts.kernel }}"
-        state: present
-      - name: "libgomp"
-        state: present
-      - name: "make"
-        state: present
-      - name: "patch"
-        state: present
-      - name: "python-pip"
-        state: present
-      - name: "VirtualBox-server"
-        state: absent
-
-  redhat:
-    all:
-      - name: "binutils"
-        state: present
-      - name: "dkms"
-        state: present
-      - name: "gcc"
-        state: present
-      - name: "glibc-headers"
-        state: present
-      - name: "glibc-devel"
-        state: present
-      - name: "kernel-headers-{{ ansible_facts.kernel }}"
-        state: present
-      - name: "kernel-devel-{{ ansible_facts.kernel }}"
-        state: present
-      - name: "libgomp"
-        state: present
-      - name: "make"
-        state: present
-      - name: "patch"
-        state: present
-      - name: "python-pip"
-        state: present
-    6:
-      - name: "@virtualization"
-        state: present
-    7:
-      - name: "@virtualization-hypervisor"
-        state: present
-      - name: "@virtualization-tools"
-        state: present
-      - name: "@virtualization-platform"
-        state: present
+      VirtualBox: present
 
 virtualbox_engine_packages_python:
   all:
@@ -117,7 +18,7 @@ virtualbox_engine_packages_python:
 
 virtualbox_engine_downloads_page: https://www.virtualbox.org/wiki/Downloads
 
-# Where to temporary save the VirtualBox extention installation package
+# Where to temporary save the VirtualBox extension installation package
 
 virtualbox_engine_extension_pack_tmp_file: >-
   /tmp/Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack
