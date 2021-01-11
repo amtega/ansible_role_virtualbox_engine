@@ -1,0 +1,55 @@
+---
+# Install tasks common to all distros
+
+- block:
+    - name: Get virtualbox downloads page
+      uri:
+        url: "{{ virtualbox_engine_downloads_page }}"
+        return_content: yes
+      register: virtualbox_engine_get_downloads_result
+
+    - name: Get virtualbox extension pack status
+      command: "VBoxManage list extpacks"
+      changed_when: no
+      register: virtualbox_engine_extpacks_status_result
+
+    - block:
+        - name: Download virtualbox extension pack installation package
+          get_url:
+            url: "{{ package }}"
+            dest: "{{ virtualbox_engine_extension_pack_tmp_file }}"
+          vars:
+            package: >-
+              {{ virtualbox_engine_get_downloads_result.content.splitlines()
+                 | select("search", "Oracle_VM_VirtualBox_Extension_Pack")
+                 | map("regex_replace", ".*(https:.*\.vbox-extpack).*", "\1")
+                 | list
+                 | first }}
+
+        - name: Install virtualbox extension pack
+          expect:
+            command: >-
+              VBoxManage extpack install
+              {{ virtualbox_engine_extension_pack_tmp_file }}
+            responses:
+              "Do you agree to these license terms and conditions": y
+          changed_when: >-
+            virtualbox_engine_extension_install_result.stdout
+            is search("Successfully installed")
+          failed_when: >-
+            not virtualbox_engine_extension_install_result.stdout
+                is search("Successfully installed")
+          register: virtualbox_engine_extension_install_result
+      when: >-
+        not virtualbox_engine_extpacks_status_result.stdout
+            is search("Oracle VM VirtualBox Extension Pack")
+
+    - name: Remove virtualbox extension pack installation package
+      file:
+        path: "{{ virtualbox_engine_extension_pack_tmp_file }}"
+        state: absent
+
+  tags:
+    - role::virtualbox_engine
+    - role::virtualbox_engine::packages
+    - role::virtualbox_engine::install
