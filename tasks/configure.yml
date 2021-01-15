@@ -16,5 +16,5 @@
         name: '{{ item }}'
       loop: "{{ virtualbox_engine_users | default([]) }}"
   tags:
-    - role::docker_engine
-    - role::docker_engine::configure
+    - role::virtualbox_engine
+    - role::virtualbox_engine::configure
