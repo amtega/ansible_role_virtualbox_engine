@@ -29,4 +29,4 @@
     - role: amtega.virtualbox_engine
       vars:
         virtualbox_engine_users: "{{ users.split(',') | map('trim') | list }}"
-      become: true
+      become: yes
