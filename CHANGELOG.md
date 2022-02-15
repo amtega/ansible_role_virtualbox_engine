@@ -6,12 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.7.0] - 2022-02-14
+## [1.7.1] - 2022-02-15
+### Fixed
+- Fixed changelog.
+
+## [1.7.0] - 2022-02-15
 ### Changed
 - Supported distros. Related to ansible/main#263
 
 ### Fixed
-- Fixed bug with virtualbox kernel modules.
+- Ensure virtualbox kernel modules are enabled.
 
 ## [1.6.0] - 2022-02-02
 ### Changed
