@@ -3,3 +3,28 @@
 - name: Prepare
   hosts: molecule_hosts
   gather_facts: no
+  become: yes
+  roles:
+    - amtega.reboot
+  tasks:
+    - name: Update kernel # noqa package-latest
+      package:
+        name: "kernel-*"
+        state: latest
+      notify:
+        - reboot host
+        - wait host
+
+    - name: Setup default kernel
+      shell: >-
+        set -o pipefail ;
+        grubby
+        --set-default
+        $(ls -1 /boot/vmlinuz*
+        | grep -v "rt"
+        | grep -v "debug"
+        | sort -V --reverse
+        | head -1)
+      when: yes
+      args:
+        warn: no
