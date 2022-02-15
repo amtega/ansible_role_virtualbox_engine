@@ -15,6 +15,19 @@
         state: present
         name: '{{ item }}'
       loop: "{{ virtualbox_engine_users | default([]) }}"
+
+    - name: Setup akmod packages
+      command: /usr/sbin/akmods
+      register: virtualbox_akmods_result
+      failed_when: virtualbox_akmods_result is search("FAILED")
+      changed_when: no
+      environment:
+        LANGUAGE: en_US
+
+    - name: Start virtualbox driver service
+      service:
+        name: vboxdrv
+        state: started
   tags:
     - role::virtualbox_engine
     - role::virtualbox_engine::configure
