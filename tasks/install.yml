@@ -48,7 +48,6 @@
       file:
         path: "{{ virtualbox_engine_extension_pack_tmp_file }}"
         state: absent
-
   tags:
     - role::virtualbox_engine
     - role::virtualbox_engine::packages
