@@ -6,6 +6,7 @@
 virtualbox_engine_packages_os:
   all:
     all:
+      kernel-devel: present
       VirtualBox: present
 
 virtualbox_engine_packages_python:

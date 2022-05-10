@@ -1,12 +1,14 @@
 ---
 # Role tasks
 
-- include_tasks: install.yml
-  tags:
-    - role::virtualbox_engine
-    - role::virtualbox_engine::install
+- block:
+    - include_tasks: install.yml
+      tags:
+        - role::virtualbox_engine::install
 
-- include_tasks: configure.yml
+    - include_tasks: configure.yml
+      tags:
+        - role::virtualbox_engine::configure
+  environment: "{{ proxy_client_environment }}"
   tags:
     - role::virtualbox_engine
-    - role::virtualbox_engine::configure
